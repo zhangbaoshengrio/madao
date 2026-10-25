@@ -11,6 +11,7 @@ object Prefs {
         "com.google.android.gm" to "Gmail",
         "com.tencent.androidqqmail" to "QQ 邮箱",
         "com.microsoft.office.outlook" to "Outlook",
+        "com.tencent.mm" to "微信（QQ邮箱提醒等）",
         "org.telegram.messenger" to "Telegram",
     )
 
