@@ -109,7 +109,7 @@ class MainActivity : Activity() {
     private fun header(): View = LinearLayout(this).apply {
         orientation = LinearLayout.VERTICAL
         setPadding(dp(4), 0, dp(4), 0)
-        addView(tv("验证码桥", 22f, text, true))
+        addView(tv("码到", 22f, text, true))
         addView(tv("ntfy 通知 → 自动填入并回车", 13f, muted))
     }
 

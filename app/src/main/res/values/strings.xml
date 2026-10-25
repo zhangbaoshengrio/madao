@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">ntfy 验证码桥</string>
+    <string name="app_name">码到</string>
     <string name="a11y_desc">收到 ntfy 验证码通知后，把验证码填入当前输入框并回车。</string>
 </resources>
