@@ -22,10 +22,10 @@
         <path android:strokeColor="#FFFFFF" android:strokeAlpha="0.6" android:strokeWidth="2.2" android:strokeLineCap="round" android:pathData="M54,44L54,49" />
         <path android:strokeColor="#FFFFFF" android:strokeAlpha="0.6" android:strokeWidth="2.2" android:strokeLineCap="round" android:pathData="M72,44L72,49" />
         <!-- 磁铁 -->
-        <path android:strokeColor="#FFFFFF" android:strokeWidth="12" android:pathData="M38,52V68a16,16 0 0 0 32,0V52" />
-        <path android:fillColor="#0F1F1B" android:pathData="M32,52h12v8h-12z" />
-        <path android:fillColor="#0F1F1B" android:pathData="M64,52h12v8h-12z" />
+        <path android:strokeColor="#5EEAC0" android:strokeWidth="12" android:pathData="M38,52V68a16,16 0 0 0 32,0V52" />
+        <path android:fillColor="#FFFFFF" android:pathData="M32,52h12v8h-12z" />
+        <path android:fillColor="#FFFFFF" android:pathData="M64,52h12v8h-12z" />
         <!-- 闪电 -->
-        <path android:fillColor="#FFE08A" android:pathData="M57,52L49,64H54L51,74L60,61H55Z" />
+        <path android:fillColor="#F5C26B" android:pathData="M57,52L49,64H54L51,74L60,61H55Z" />
     </group>
 </vector>

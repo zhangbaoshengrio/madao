@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 整体缩进自适应图标安全区 -->
+    <group
+        android:pivotX="54"
+        android:pivotY="54"
+        android:scaleX="0.85"
+        android:scaleY="0.85"
+        android:translateY="-5">
+        <!-- 6 位验证码 -->
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="2.2" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M27.5,30.5V36H33.5M32,30.5V41.5" />
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="2.2" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M36.9,30.5H42.9V41.5H36.9ZM36.9,36H42.9" />
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="2.2" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M46.3,30.5H52.3V36H46.3V41.5H52.3" />
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="2.2" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M61.7,36H55.7V30.5H61.7V41.5H55.7" />
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="2.2" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M66.1,32.5L68.1,30.5V41.5" />
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="2.2" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M80.5,30.5H74.5V36H80.5V41.5H74.5" />
+        <path android:strokeColor="#FFFFFF" android:strokeAlpha="0.6" android:strokeWidth="2.2" android:strokeLineCap="round" android:pathData="M36,44L36,49" />
+        <path android:strokeColor="#FFFFFF" android:strokeAlpha="0.6" android:strokeWidth="2.2" android:strokeLineCap="round" android:pathData="M54,44L54,49" />
+        <path android:strokeColor="#FFFFFF" android:strokeAlpha="0.6" android:strokeWidth="2.2" android:strokeLineCap="round" android:pathData="M72,44L72,49" />
+        <!-- 磁铁 -->
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="12" android:pathData="M38,52V68a16,16 0 0 0 32,0V52" />
+        <path android:fillColor="#FFFFFF" android:pathData="M32,52h12v8h-12z" />
+        <path android:fillColor="#FFFFFF" android:pathData="M64,52h12v8h-12z" />
+        <!-- 闪电 -->
+        <path android:fillColor="#FFFFFF" android:pathData="M57,52L49,64H54L51,74L60,61H55Z" />
+    </group>
+</vector>

@@ -7,6 +7,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
@@ -28,13 +29,25 @@ import android.widget.TextView
 import android.widget.Toast
 
 class MainActivity : Activity() {
-    private val bg = Color.parseColor("#F2F5F3")
-    private val ink = Color.parseColor("#0F1F1B")
-    private val text = Color.parseColor("#12201C")
-    private val muted = Color.parseColor("#51615B")
+    private val night get() =
+        (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+    private fun c(day: String, dark: String) = Color.parseColor(if (night) dark else day)
+
+    private val bg get() = c("#F2F5F3", "#0B1210")
+    private val cardBg get() = c("#FFFFFF", "#16211E")
+    private val ink get() = c("#0F1F1B", "#15302A")
+    private val text get() = c("#12201C", "#E8F1EE")
+    private val muted get() = c("#51615B", "#9FB5AD")
     private val teal = Color.parseColor("#0B7A5C")
     private val mint = Color.parseColor("#5EEAC0")
-    private val line = Color.parseColor("#E4EAE7")
+    private val line get() = c("#E4EAE7", "#26332F")
+    private val inputBg get() = c("#F8FAF9", "#0F1815")
+    private val inputStroke get() = c("#CBD6D1", "#33423D")
+    private val trackOff get() = c("#B7C3BE", "#3C4A45")
+    private val warnText get() = c("#9A3608", "#FFB27D")
+    private val okPillBg get() = c("#E1F5EE", "#12352C")
+    private val okPillFg get() = c("#0B6048", "#5EEAC0")
+    private val warnPillBg get() = c("#FFEDE0", "#3A2315")
 
     private lateinit var content: LinearLayout
     private fun dp(v: Int) = (v * resources.displayMetrics.density).toInt()
@@ -43,7 +56,8 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         window.statusBarColor = bg
         window.navigationBarColor = bg
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+        window.decorView.systemUiVisibility =
+            if (night) 0 else View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
         content = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(16), dp(24), dp(16), dp(24))
@@ -97,7 +111,7 @@ class MainActivity : Activity() {
 
     private fun card() = LinearLayout(this).apply {
         orientation = LinearLayout.VERTICAL
-        background = shape(Color.WHITE, 20)
+        background = shape(cardBg, 20)
         setPadding(dp(16), dp(6), dp(16), dp(6))
     }
 
@@ -172,8 +186,8 @@ class MainActivity : Activity() {
                 addView(tv(title, 15f, text, true))
                 addView(tv(sub, 12f, muted))
             })
-            addView(tv(if (ok) "已开启" else "去设置", 12f, if (ok) Color.parseColor("#0B6048") else Color.parseColor("#9A3608"), true).apply {
-                background = shape(if (ok) Color.parseColor("#E1F5EE") else Color.parseColor("#FFEDE0"), 12)
+            addView(tv(if (ok) "已开启" else "去设置", 12f, if (ok) okPillFg else warnText, true).apply {
+                background = shape(if (ok) okPillBg else warnPillBg, 12)
                 setPadding(dp(10), dp(5), dp(10), dp(5))
             })
         }
@@ -191,7 +205,7 @@ class MainActivity : Activity() {
             addView(Switch(context).apply {
                 isChecked = checked
                 val states = arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf())
-                trackTintList = ColorStateList(states, intArrayOf(teal, Color.parseColor("#B7C3BE")))
+                trackTintList = ColorStateList(states, intArrayOf(teal, trackOff))
                 thumbTintList = ColorStateList.valueOf(Color.WHITE)
                 setOnCheckedChangeListener { _, v -> onChange(v) }
             })
@@ -226,7 +240,7 @@ class MainActivity : Activity() {
             hint = "其他应用包名，如 com.example.app"
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
             setSingleLine(); textSize = 14f; typeface = Typeface.MONOSPACE; setTextColor(this@MainActivity.text)
-            background = shape(Color.parseColor("#F8FAF9"), 12, Color.parseColor("#CBD6D1"))
+            background = shape(inputBg, 12, inputStroke)
             setPadding(dp(12), 0, dp(12), 0)
         }
         addView(LinearLayout(context).apply {
@@ -247,7 +261,7 @@ class MainActivity : Activity() {
         addView(tv(
             "注意：只有通知里能看到验证码才有效。若应用设置了“锁屏/通知不显示内容”（邮件类应用常见），" +
                 "请在系统的通知设置里改为显示全部内容；邮件需要有新邮件通知，且通知预览里含验证码。",
-            12f, Color.parseColor("#9A3608"),
+            12f, warnText,
         ), lp(top = 12).apply { bottomMargin = dp(10) })
     }
 }
