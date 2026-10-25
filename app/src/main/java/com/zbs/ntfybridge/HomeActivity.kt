@@ -41,6 +41,7 @@ class HomeActivity : Activity() {
     private val muted get() = c("#51615B", "#9FB5AD")
     private val teal = Color.parseColor("#0B7A5C")
     private val mint = Color.parseColor("#5EEAC0")
+    private val switchOn get() = c("#14532D", "#2F9E5B")
     private val line get() = c("#E4EAE7", "#26332F")
     private val inputBg get() = c("#F8FAF9", "#0F1815")
     private val inputStroke get() = c("#CBD6D1", "#33423D")
@@ -210,7 +211,7 @@ class HomeActivity : Activity() {
                     setColor(color); cornerRadius = dp(16).toFloat(); setSize(dp(52), dp(32))
                 }
                 trackDrawable = StateListDrawable().apply {
-                    addState(intArrayOf(android.R.attr.state_checked), pill(teal))
+                    addState(intArrayOf(android.R.attr.state_checked), pill(switchOn))
                     addState(intArrayOf(), pill(trackOff))
                 }
                 thumbDrawable = InsetDrawable(
