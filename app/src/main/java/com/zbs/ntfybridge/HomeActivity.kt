@@ -80,7 +80,7 @@ class HomeActivity : Activity() {
         content.addView(header())
         content.addView(heroCard(listenerOn && a11yOn), lp(top = 14))
         content.addView(card().apply {
-            addView(permRow("通知使用权", "读取 ntfy 的通知内容", listenerOn, "M18 8a6 6 0 0 0-12 0") {
+            addView(permRow("通知使用权", "读取你开启的应用发来的通知内容", listenerOn, "M18 8a6 6 0 0 0-12 0") {
                 startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
             })
             addView(divider())
