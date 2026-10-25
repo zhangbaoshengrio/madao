@@ -1,0 +1,7 @@
+<resources>
+    <!-- 去掉系统默认的紫色标题栏，界面里自己画标题 -->
+    <style name="AppTheme" parent="android:Theme.DeviceDefault.DayNight">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+</resources>

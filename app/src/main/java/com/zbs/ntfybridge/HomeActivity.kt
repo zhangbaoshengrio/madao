@@ -6,11 +6,12 @@ import android.content.ClipboardManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.InsetDrawable
+import android.graphics.drawable.StateListDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.PowerManager
@@ -204,9 +205,20 @@ class HomeActivity : Activity() {
             })
             addView(Switch(context).apply {
                 isChecked = checked
-                val states = arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf())
-                trackTintList = ColorStateList(states, intArrayOf(teal, trackOff))
-                thumbTintList = ColorStateList.valueOf(Color.WHITE)
+                // 自绘开关：实心绿色轨道 + 白色圆形滑块（避免系统样式把颜色变淡）
+                fun pill(color: Int) = GradientDrawable().apply {
+                    setColor(color); cornerRadius = dp(16).toFloat(); setSize(dp(52), dp(32))
+                }
+                trackDrawable = StateListDrawable().apply {
+                    addState(intArrayOf(android.R.attr.state_checked), pill(teal))
+                    addState(intArrayOf(), pill(trackOff))
+                }
+                thumbDrawable = InsetDrawable(
+                    GradientDrawable().apply {
+                        shape = GradientDrawable.OVAL; setColor(Color.WHITE); setSize(dp(26), dp(26))
+                    },
+                    dp(3),
+                )
                 setOnCheckedChangeListener { _, v -> onChange(v) }
             })
         }
