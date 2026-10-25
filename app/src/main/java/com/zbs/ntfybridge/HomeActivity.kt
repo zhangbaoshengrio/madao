@@ -28,7 +28,7 @@ import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 
-class MainActivity : Activity() {
+class HomeActivity : Activity() {
     private val night get() =
         (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
     private fun c(day: String, dark: String) = Color.parseColor(if (night) dark else day)
@@ -239,7 +239,7 @@ class MainActivity : Activity() {
         val input = EditText(context).apply {
             hint = "其他应用包名，如 com.example.app"
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
-            setSingleLine(); textSize = 14f; typeface = Typeface.MONOSPACE; setTextColor(this@MainActivity.text)
+            setSingleLine(); textSize = 14f; typeface = Typeface.MONOSPACE; setTextColor(this@HomeActivity.text)
             background = shape(inputBg, 12, inputStroke)
             setPadding(dp(12), 0, dp(12), 0)
         }
