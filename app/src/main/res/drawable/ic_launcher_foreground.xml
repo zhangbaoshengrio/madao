@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- 缩小到自适应图标安全区内 -->
+    <group
+        android:pivotX="54"
+        android:pivotY="54"
+        android:scaleX="0.74"
+        android:scaleY="0.74"
+        android:translateY="6">
+        <!-- 磁铁：把所有验证码吸过来 -->
+        <path
+            android:strokeColor="#5EEAC0"
+            android:strokeWidth="14"
+            android:pathData="M32,40V68a22,22 0 0 0 44,0V40" />
+        <path android:fillColor="#FFFFFF" android:pathData="M25,40h14v10h-14z" />
+        <path android:fillColor="#FFFFFF" android:pathData="M69,40h14v10h-14z" />
+        <!-- 闪电：自动 -->
+        <path android:fillColor="#F5C26B" android:pathData="M57,42L46,58H53L50,70L63,52H56Z" />
+        <group android:rotation="-10" android:pivotX="29" android:pivotY="13">
+            <path android:fillColor="#5EEAC0" android:pathData="M26,6h6a4,4 0 0 1 4,4v6a4,4 0 0 1 -4,4h-6a4,4 0 0 1 -4,-4v-6a4,4 0 0 1 4,-4z" />
+        </group>
+        <group android:rotation="0" android:pivotX="54" android:pivotY="10">
+            <path android:fillColor="#FFFFFF" android:pathData="M51,3h6a4,4 0 0 1 4,4v6a4,4 0 0 1 -4,4h-6a4,4 0 0 1 -4,-4v-6a4,4 0 0 1 4,-4z" />
+        </group>
+        <group android:rotation="10" android:pivotX="79" android:pivotY="13">
+            <path android:fillColor="#F5C26B" android:pathData="M76,6h6a4,4 0 0 1 4,4v6a4,4 0 0 1 -4,4h-6a4,4 0 0 1 -4,-4v-6a4,4 0 0 1 4,-4z" />
+        </group>
+        <path android:strokeColor="#5EEAC0" android:strokeAlpha="0.65" android:strokeWidth="2.4" android:strokeLineCap="round" android:pathData="M29,24L31,34" />
+        <path android:strokeColor="#FFFFFF" android:strokeAlpha="0.65" android:strokeWidth="2.4" android:strokeLineCap="round" android:pathData="M54,21L54,33" />
+        <path android:strokeColor="#F5C26B" android:strokeAlpha="0.65" android:strokeWidth="2.4" android:strokeLineCap="round" android:pathData="M79,24L77,34" />
+    </group>
+</vector>
