@@ -79,6 +79,7 @@ class MainActivity : Activity() {
                 startActivity(Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:$packageName")))
             })
         }, lp(top = 14))
+        content.addView(sourcesCard(), lp(top = 14))
         content.addView(settingsCard(), lp(top = 14))
     }
 
@@ -117,7 +118,8 @@ class MainActivity : Activity() {
         val shown = if (last.length == 6) last.substring(0, 3) + " " + last.substring(3) else last.ifEmpty { "——" }
         val at = Prefs.lastCodeAt(this)
         val whenText = if (last.isEmpty()) "还没有收到验证码"
-        else DateUtils.getRelativeTimeSpanString(at, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS).toString() + " · 已复制"
+        else DateUtils.getRelativeTimeSpanString(at, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS).toString() +
+            Prefs.lastSource(this).let { if (it.isEmpty()) "" else " · 来自 $it" } + " · 已复制"
 
         return LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
@@ -132,7 +134,7 @@ class MainActivity : Activity() {
                 })
                 addView(tv(if (running) "运行中" else "未就绪：请完成下方授权", 15f, Color.parseColor("#E8F1EE"), true))
             })
-            addView(tv("监听 ${Prefs.sourcePackage(context)}", 12f, Color.parseColor("#9FB5AD")), lp(top = 4))
+            addView(tv("监听 ${Prefs.sources(context).size} 个应用", 12f, Color.parseColor("#9FB5AD")), lp(top = 4))
             addView(tv("最近一次验证码", 12f, Color.parseColor("#9FB5AD")), lp(top = 18))
             addView(tv(shown, 44f, Color.WHITE, true).apply {
                 typeface = Typeface.create(Typeface.MONOSPACE, Typeface.BOLD)
@@ -199,30 +201,53 @@ class MainActivity : Activity() {
         addView(toggleRow("自动填入输入框", "收到验证码后写入当前焦点输入框", Prefs.autoFill(context)) { Prefs.setAutoFill(context, it) })
         addView(divider())
         addView(toggleRow("填入后自动回车", "自动提交，省去手动点确认", Prefs.autoEnter(context)) { Prefs.setAutoEnter(context, it) })
-        addView(divider())
-        addView(tv("监听的应用包名", 13f, muted), lp(top = 12))
-        val pkg = EditText(context).apply {
-            setText(Prefs.sourcePackage(context)); inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
+    }
+
+    private fun sourcesCard(): View = card().apply {
+        setPadding(dp(16), dp(12), dp(16), dp(6))
+        addView(tv("监听的应用", 15f, text, true))
+        addView(tv("打开开关的应用发来的通知，只要含验证码就会复制并填入。", 12f, muted), lp(top = 2))
+        val current = Prefs.sources(context)
+        val extra = current.filter { it !in Prefs.PRESETS }
+        (Prefs.PRESETS.keys.toList() + extra).forEach { pkg ->
+            val name = Prefs.PRESETS[pkg] ?: pkg
+            addView(divider(), lp(top = 8))
+            addView(toggleRow(name, if (pkg in Prefs.PRESETS) pkg else "自定义 · 长按可移除", pkg in current) {
+                Prefs.setSource(context, pkg, it)
+                if (pkg !in Prefs.PRESETS) render()
+            }.apply {
+                if (pkg !in Prefs.PRESETS) setOnLongClickListener {
+                    Prefs.setSource(context, pkg, false); render(); true
+                }
+            })
+        }
+        addView(divider(), lp(top = 8))
+        val input = EditText(context).apply {
+            hint = "其他应用包名，如 com.example.app"
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
             setSingleLine(); textSize = 14f; typeface = Typeface.MONOSPACE; setTextColor(this@MainActivity.text)
             background = shape(Color.parseColor("#F8FAF9"), 12, Color.parseColor("#CBD6D1"))
             setPadding(dp(12), 0, dp(12), 0)
-            minHeight = dp(44)
         }
         addView(LinearLayout(context).apply {
             gravity = Gravity.CENTER_VERTICAL
-            addView(pkg, LinearLayout.LayoutParams(0, dp(44), 1f).apply { marginEnd = dp(8) })
+            addView(input, LinearLayout.LayoutParams(0, dp(44), 1f).apply { marginEnd = dp(8) })
             addView(Button(context).apply {
-                this.text = "保存"; isAllCaps = false; textSize = 14f; setTextColor(Color.WHITE)
+                this.text = "添加"; isAllCaps = false; textSize = 14f; setTextColor(Color.WHITE)
                 typeface = Typeface.DEFAULT_BOLD
                 background = shape(teal, 12)
                 minHeight = dp(44); minimumHeight = dp(44)
                 setPadding(dp(18), 0, dp(18), 0)
                 setOnClickListener {
-                    Prefs.setSourcePackage(context, pkg.text.toString())
-                    Toast.makeText(context, "已保存", Toast.LENGTH_SHORT).show()
-                    render()
+                    val v = input.text.toString().trim()
+                    if (v.isNotEmpty()) { Prefs.setSource(context, v, true); render() }
                 }
             })
-        }, lp(top = 8).apply { bottomMargin = dp(12) })
+        }, lp(top = 10))
+        addView(tv(
+            "注意：只有通知里能看到验证码才有效。若应用设置了“锁屏/通知不显示内容”（邮件类应用常见），" +
+                "请在系统的通知设置里改为显示全部内容；邮件需要有新邮件通知，且通知预览里含验证码。",
+            12f, Color.parseColor("#9A3608"),
+        ), lp(top = 12).apply { bottomMargin = dp(10) })
     }
 }

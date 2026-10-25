@@ -13,12 +13,14 @@ class NtfyListenerService : NotificationListenerService() {
     private var lastAt = 0L
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
-        if (sbn.packageName != Prefs.sourcePackage(this)) return
+        if (sbn.packageName !in Prefs.sources(this)) return
         val e = sbn.notification.extras
         val text = listOfNotNull(
             e.getCharSequence(Notification.EXTRA_TITLE),
             e.getCharSequence(Notification.EXTRA_TEXT),
             e.getCharSequence(Notification.EXTRA_BIG_TEXT),
+            e.getCharSequence(Notification.EXTRA_SUB_TEXT),
+            e.getCharSequenceArray(Notification.EXTRA_TEXT_LINES)?.joinToString("\n"),
         ).joinToString("\n")
         val code = CodeExtractor.extract(text) ?: return
 
@@ -28,7 +30,10 @@ class NtfyListenerService : NotificationListenerService() {
         if (key == lastKey && now - lastAt < 30_000) return
         lastKey = key; lastAt = now
 
-        Prefs.setLastCode(this, code)
+        val label = Prefs.PRESETS[sbn.packageName] ?: runCatching {
+            packageManager.getApplicationLabel(packageManager.getApplicationInfo(sbn.packageName, 0)).toString()
+        }.getOrDefault(sbn.packageName)
+        Prefs.setLastCode(this, code, label)
         val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         cm.setPrimaryClip(ClipData.newPlainText("code", code))
         if (Prefs.autoFill(this)) AutoFillService.request(code, Prefs.autoEnter(this))
