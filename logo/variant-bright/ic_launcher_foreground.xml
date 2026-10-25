@@ -4,33 +4,28 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- 缩小到自适应图标安全区内 -->
+    <!-- 整体缩进自适应图标安全区 -->
     <group
         android:pivotX="54"
         android:pivotY="54"
-        android:scaleX="0.74"
-        android:scaleY="0.74"
-        android:translateY="6">
-        <!-- 磁铁：把所有验证码吸过来 -->
-        <path
-            android:strokeColor="#FFFFFF"
-            android:strokeWidth="14"
-            android:pathData="M32,40V68a22,22 0 0 0 44,0V40" />
-        <path android:fillColor="#0F1F1B" android:pathData="M25,40h14v10h-14z" />
-        <path android:fillColor="#0F1F1B" android:pathData="M69,40h14v10h-14z" />
-        <!-- 闪电：自动 -->
-        <path android:fillColor="#FFE08A" android:pathData="M57,42L46,58H53L50,70L63,52H56Z" />
-        <group android:rotation="-10" android:pivotX="29" android:pivotY="13">
-            <path android:fillColor="#FFFFFF" android:pathData="M26,6h6a4,4 0 0 1 4,4v6a4,4 0 0 1 -4,4h-6a4,4 0 0 1 -4,-4v-6a4,4 0 0 1 4,-4z" />
-        </group>
-        <group android:rotation="0" android:pivotX="54" android:pivotY="10">
-            <path android:fillColor="#FFE08A" android:pathData="M51,3h6a4,4 0 0 1 4,4v6a4,4 0 0 1 -4,4h-6a4,4 0 0 1 -4,-4v-6a4,4 0 0 1 4,-4z" />
-        </group>
-        <group android:rotation="10" android:pivotX="79" android:pivotY="13">
-            <path android:fillColor="#0F1F1B" android:pathData="M76,6h6a4,4 0 0 1 4,4v6a4,4 0 0 1 -4,4h-6a4,4 0 0 1 -4,-4v-6a4,4 0 0 1 4,-4z" />
-        </group>
-        <path android:strokeColor="#FFFFFF" android:strokeAlpha="0.65" android:strokeWidth="2.4" android:strokeLineCap="round" android:pathData="M29,24L31,34" />
-        <path android:strokeColor="#FFE08A" android:strokeAlpha="0.65" android:strokeWidth="2.4" android:strokeLineCap="round" android:pathData="M54,21L54,33" />
-        <path android:strokeColor="#0F1F1B" android:strokeAlpha="0.65" android:strokeWidth="2.4" android:strokeLineCap="round" android:pathData="M79,24L77,34" />
+        android:scaleX="0.85"
+        android:scaleY="0.85"
+        android:translateY="-5">
+        <!-- 6 位验证码 -->
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="2.2" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M27.5,30.5V36H33.5M32,30.5V41.5" />
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="2.2" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M36.9,30.5H42.9V41.5H36.9ZM36.9,36H42.9" />
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="2.2" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M46.3,30.5H52.3V36H46.3V41.5H52.3" />
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="2.2" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M61.7,36H55.7V30.5H61.7V41.5H55.7" />
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="2.2" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M66.1,32.5L68.1,30.5V41.5" />
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="2.2" android:strokeLineCap="round" android:strokeLineJoin="round" android:pathData="M80.5,30.5H74.5V36H80.5V41.5H74.5" />
+        <path android:strokeColor="#FFFFFF" android:strokeAlpha="0.6" android:strokeWidth="2.2" android:strokeLineCap="round" android:pathData="M36,44L36,49" />
+        <path android:strokeColor="#FFFFFF" android:strokeAlpha="0.6" android:strokeWidth="2.2" android:strokeLineCap="round" android:pathData="M54,44L54,49" />
+        <path android:strokeColor="#FFFFFF" android:strokeAlpha="0.6" android:strokeWidth="2.2" android:strokeLineCap="round" android:pathData="M72,44L72,49" />
+        <!-- 磁铁 -->
+        <path android:strokeColor="#FFFFFF" android:strokeWidth="12" android:pathData="M38,52V68a16,16 0 0 0 32,0V52" />
+        <path android:fillColor="#0F1F1B" android:pathData="M32,52h12v8h-12z" />
+        <path android:fillColor="#0F1F1B" android:pathData="M64,52h12v8h-12z" />
+        <!-- 闪电 -->
+        <path android:fillColor="#FFE08A" android:pathData="M57,52L49,64H54L51,74L60,61H55Z" />
     </group>
 </vector>
