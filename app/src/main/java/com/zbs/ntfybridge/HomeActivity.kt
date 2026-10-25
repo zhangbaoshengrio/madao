@@ -10,8 +10,6 @@ import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.InsetDrawable
-import android.graphics.drawable.StateListDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.PowerManager
@@ -25,7 +23,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ScrollView
-import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 
@@ -204,24 +201,7 @@ class HomeActivity : Activity() {
                 addView(tv(title, 15f, text, true))
                 addView(tv(sub, 12f, muted))
             })
-            addView(Switch(context).apply {
-                isChecked = checked
-                // 自绘开关：实心绿色轨道 + 白色圆形滑块（避免系统样式把颜色变淡）
-                fun pill(color: Int) = GradientDrawable().apply {
-                    setColor(color); cornerRadius = dp(16).toFloat(); setSize(dp(52), dp(32))
-                }
-                trackDrawable = StateListDrawable().apply {
-                    addState(intArrayOf(android.R.attr.state_checked), pill(switchOn))
-                    addState(intArrayOf(), pill(trackOff))
-                }
-                thumbDrawable = InsetDrawable(
-                    GradientDrawable().apply {
-                        shape = GradientDrawable.OVAL; setColor(Color.WHITE); setSize(dp(26), dp(26))
-                    },
-                    dp(3),
-                )
-                setOnCheckedChangeListener { _, v -> onChange(v) }
-            })
+            addView(ToggleView(context, switchOn, trackOff, checked, onChange))
         }
 
     private fun settingsCard(): View = card().apply {
