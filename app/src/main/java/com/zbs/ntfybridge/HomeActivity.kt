@@ -15,6 +15,10 @@ import android.os.Bundle
 import android.os.PowerManager
 import android.provider.Settings
 import android.text.InputType
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
 import android.text.format.DateUtils
 import android.view.Gravity
 import android.view.View
@@ -66,6 +70,18 @@ class HomeActivity : Activity() {
             isFillViewport = true
             addView(content, ViewGroup.LayoutParams(-1, -2))
         })
+        showVersionInTitle()
+    }
+
+    /** 标题栏显示“码到  v1.x.x”，版本号用较小的灰色字，取自已安装应用本身。 */
+    private fun showVersionInTitle() {
+        val version = runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull()
+        if (version.isNullOrBlank()) return
+        val name = "码到"
+        title = SpannableString("$name  v$version").apply {
+            setSpan(RelativeSizeSpan(0.6f), name.length, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(ForegroundColorSpan(muted), name.length, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
     }
 
     override fun onResume() { super.onResume(); render() }
